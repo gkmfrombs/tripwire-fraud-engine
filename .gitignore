@@ -1,0 +1,15 @@
+# secrets
+.env
+
+# data (versioned by DVC, never by Git)
+data/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# os / editor
+.DS_Store
+.vscode/
