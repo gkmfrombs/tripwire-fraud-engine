@@ -2,7 +2,7 @@
 .env
 
 # data (versioned by DVC, never by Git)
-data/
+/data/
 
 # python
 __pycache__/
