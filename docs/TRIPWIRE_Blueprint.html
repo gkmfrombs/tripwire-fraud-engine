@@ -407,7 +407,7 @@
     <span class="eyebrow">02 / TECHNICAL APPROACH</span>
     <h2>The stack</h2>
     <ul class="stack-list">
-      <li><span class="tool">MinIO + DVC</span><span class="desc">Local S3-compatible object storage, with every dataset version tracked</span></li>
+      <li><span class="tool">SeaweedFS + DVC</span><span class="desc">Local S3-compatible object storage, with every dataset version tracked</span></li>
       <li><span class="tool">Feast + Redis</span><span class="desc">Feature store serving rolling user features at sub-millisecond latency</span></li>
       <li><span class="tool">MLflow</span><span class="desc">Experiment tracking and the model registry of record</span></li>
       <li><span class="tool">Prefect</span><span class="desc">Orchestrates ingestion, validation, and retraining as one flow</span></li>
@@ -423,7 +423,7 @@
     <p class="lead">Every arrow below is a real network hop between two running services — nothing here is a diagram of intent, it's a diagram of what actually gets deployed.</p>
     <div class="flow">
       <span class="flow-step">Raw Transactions</span><span class="flow-arrow">→</span>
-      <span class="flow-step">MinIO + DVC</span><span class="flow-arrow">→</span>
+      <span class="flow-step">SeaweedFS + DVC</span><span class="flow-arrow">→</span>
       <span class="flow-step">Validation</span><span class="flow-arrow">→</span>
       <span class="flow-step">Feast + Redis</span><span class="flow-arrow">→</span>
       <span class="flow-step">XGBoost Training</span><span class="flow-arrow">→</span>
@@ -472,7 +472,7 @@ mkdir -p kubernetes/deployments kubernetes/services
 mkdir -p .github/workflows
 touch .gitignore requirements.txt Dockerfile</code></pre>
     </div>
-    <p class="note">Add Python, Jupyter, and OS artifacts to <code>.gitignore</code> — and add <code>data/</code> too. Large datasets belong in MinIO and DVC, never in Git history.</p>
+    <p class="note">Add Python, Jupyter, and OS artifacts to <code>.gitignore</code> — and add <code>data/</code> too. Large datasets belong in SeaweedFS and DVC, never in Git history.</p>
   </section>
 
   <section>
@@ -485,8 +485,8 @@ touch .gitignore requirements.txt Dockerfile</code></pre>
         <h4>Infrastructure Foundations</h4>
         <p class="goal">Goal — stand up the storage and tracking backbone.</p>
         <ul>
-          <li>Write a <code>docker-compose.yml</code> to run MinIO and MLflow together</li>
-          <li>Point MLflow's artifact store at MinIO</li>
+          <li>Write a <code>docker-compose.yml</code> to run SeaweedFS and MLflow together</li>
+          <li>Point MLflow's artifact store at SeaweedFS</li>
           <li>Confirm both dashboards load on <code>localhost</code></li>
         </ul>
       </div>
@@ -499,7 +499,7 @@ touch .gitignore requirements.txt Dockerfile</code></pre>
         <p class="goal">Goal — get real-world-grounded data flowing and features ready to serve.</p>
         <ul>
           <li>Load the <strong>PaySim</strong> dataset — synthetic mobile-money transactions built from real transaction logs, with human-readable fields</li>
-          <li>Push the raw data to MinIO, initialize DVC with MinIO as the remote</li>
+          <li>Push the raw data to SeaweedFS, initialize DVC with SeaweedFS as the remote</li>
           <li>Cross-check the dataset's fraud-category split against RBI's real fraud statistics (<code>data.gov.in</code>) — flag and document any mismatch instead of hiding it</li>
           <li>Define entities and feature views in Feast, materialize to Redis</li>
         </ul>

@@ -10,6 +10,11 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 
+# mlflow local artifacts
+mlruns/
+mlartifacts/
+*.db
+
 # os / editor
 .DS_Store
 .vscode/
